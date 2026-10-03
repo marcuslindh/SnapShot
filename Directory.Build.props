@@ -1,0 +1,61 @@
+<Project>
+
+  <!--
+    Kodkvalitetsuppsättningen från Medusa (docs/code-quality.md), utan Medusa.Analyzers:
+    dess regler förutsätter CQRS/Mediator och vore bara tysta här.
+
+    TreatWarningsAsErrors ligger här i stället för per csproj (som i Medusa), så att inget
+    projekt - testprojektet inräknat - kan glömma det.
+  -->
+  <PropertyGroup>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <LangVersion>latest</LangVersion>
+    <AnalysisLevel>latest-recommended</AnalysisLevel>
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+
+    <!-- Krävs för att doc-kommentarsreglerna (AVIG0011, CS1591) ska kontrolleras i bygget. -->
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- SonarQube: 6000+ rules for bugs, vulnerabilities, code smells -->
+    <PackageReference Include="SonarAnalyzer.CSharp" Version="10.30.0.144632">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+
+    <!-- Meziantou: security, performance, usage, async best practices -->
+    <PackageReference Include="Meziantou.Analyzer" Version="3.0.126">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+
+    <!-- Roslynator: 500+ analyzers, refactorings, code fixes -->
+    <PackageReference Include="Roslynator.Analyzers" Version="4.15.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+
+    <!-- AsyncFixer: common async/await misuse detection -->
+    <PackageReference Include="AsyncFixer" Version="2.1.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+
+    <!-- VS Threading: deep async/threading rules (VSTHRD*) -->
+    <PackageReference Include="Microsoft.VisualStudio.Threading.Analyzers" Version="18.7.23">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+
+    <!-- Avig.Analyzers: projektoberoende regler. Severity sätts i .editorconfig. -->
+    <PackageReference Include="Avig.Analyzers" Version="1.1.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+</Project>

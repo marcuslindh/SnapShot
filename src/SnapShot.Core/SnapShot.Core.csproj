@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <RootNamespace>SnapShot.Core</RootNamespace>
+    <IsAotCompatible>true</IsAotCompatible>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Avig.Result" Version="1.0.2" />
+    <PackageReference Include="System.IO.Hashing" Version="10.0.8" />
+  </ItemGroup>
+
+</Project>

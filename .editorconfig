@@ -1,0 +1,440 @@
+root = true
+
+[*]
+charset = utf-8
+end_of_line = crlf
+insert_final_newline = true
+
+# Från Medusa (docs/code-quality.md). MEDUSA*-reglerna och Medusas sökvägsspecifika
+# undantag är borttagna; allt annat är oförändrat om inget annat sägs.
+
+[*.cs]
+
+### Project convention overrides ###
+
+# RCS1033: Remove redundant boolean literal — project uses explicit bool comparisons
+dotnet_diagnostic.RCS1033.severity = none
+
+# S1125: Boolean literals should not be redundant — same convention
+dotnet_diagnostic.S1125.severity = none
+
+# IDE0055: Fix formatting
+dotnet_diagnostic.IDE0055.severity = none
+
+### ASP.NET Core / web project rules ###
+
+# MA0004: Use ConfigureAwait — not needed in ASP.NET Core apps
+dotnet_diagnostic.MA0004.severity = none
+
+# MA0039: Custom certificate validation — internal services use self-signed certs
+dotnet_diagnostic.MA0039.severity = none
+
+# S4830: Server certificates should be verified — same reason
+dotnet_diagnostic.S4830.severity = none
+
+# CA5359: Do not disable certificate validation — same reason
+dotnet_diagnostic.CA5359.severity = none
+
+# S6931: Route templates starting with "/" — used intentionally
+dotnet_diagnostic.S6931.severity = none
+
+# S6934: Specify route on controller
+dotnet_diagnostic.S6934.severity = none
+
+# S6964: Controller should not depend on IFormFile
+dotnet_diagnostic.S6964.severity = none
+
+# ASP0016: Do not return a value from RequestDelegate
+dotnet_diagnostic.ASP0016.severity = warning
+
+# S6932: Use IFormCollection instead of Request.Form
+dotnet_diagnostic.S6932.severity = suggestion
+
+### String/culture rules ###
+
+# MA0002: Use IEqualityComparer/IComparer parameter
+dotnet_diagnostic.MA0002.severity = suggestion
+
+# MA0006: Use string.Equals with StringComparison
+dotnet_diagnostic.MA0006.severity = suggestion
+
+# MA0011: Use an overload with StringComparison
+dotnet_diagnostic.MA0011.severity = suggestion
+
+# CA1305: Specify IFormatProvider
+dotnet_diagnostic.CA1305.severity = suggestion
+
+# CA1310: Specify StringComparison for correctness
+dotnet_diagnostic.CA1310.severity = suggestion
+
+# CA1304: Specify CultureInfo
+dotnet_diagnostic.CA1304.severity = none
+
+# CA1311: Specify a culture or use invariant version
+dotnet_diagnostic.CA1311.severity = suggestion
+
+### Naming / style rules ###
+
+# MA0048: File name must match type name — Command+Handler same-file pattern
+dotnet_diagnostic.MA0048.severity = none
+
+# MA0016: Prefer return collection abstraction
+dotnet_diagnostic.MA0016.severity = none
+
+# CA1707: Identifiers should not contain underscores
+dotnet_diagnostic.CA1707.severity = none
+
+# CA1716: Identifiers should not match keywords
+dotnet_diagnostic.CA1716.severity = none
+
+# CA1720: Identifiers should not contain type names
+dotnet_diagnostic.CA1720.severity = none
+
+# CA1711: Identifiers should not have incorrect suffix
+dotnet_diagnostic.CA1711.severity = none
+
+# CA1000: Do not declare static members on generic types
+dotnet_diagnostic.CA1000.severity = none
+
+### Complexity / method length ###
+
+# MA0051: Method is too long
+dotnet_diagnostic.MA0051.severity = suggestion
+
+### Performance ###
+
+# CA1848: Use LoggerMessage delegates
+dotnet_diagnostic.CA1848.severity = error
+
+# CA1873: Avoid potentially expensive logging
+dotnet_diagnostic.CA1873.severity = none
+
+# CA1869: Cache and reuse JsonSerializerOptions
+dotnet_diagnostic.CA1869.severity = warning
+
+# CA1861: Avoid constant arrays as arguments
+dotnet_diagnostic.CA1861.severity = warning
+
+# CA1852: Type can be sealed
+dotnet_diagnostic.CA1852.severity = suggestion
+
+# CA1822: Mark members as static
+dotnet_diagnostic.CA1822.severity = error
+
+### Sonar misc ###
+
+# S3267: Loops should be simplified with LINQ
+dotnet_diagnostic.S3267.severity = none
+
+# S1075: URIs should not be hardcoded
+dotnet_diagnostic.S1075.severity = error
+
+# S2701: Literal boolean in assertions
+dotnet_diagnostic.S2701.severity = none
+
+# S1481: Unused local variables
+dotnet_diagnostic.S1481.severity = warning
+
+# RCS1163: Unused parameter — surfaces params that are bound (e.g. [FromQuery]) but
+# never passed through to the handler, which usually means a forgotten wire-up bug
+# rather than intentional API shape.
+dotnet_diagnostic.RCS1163.severity = error
+
+# RCS1123: Add parentheses when necessary
+dotnet_diagnostic.RCS1123.severity = error
+
+# RCS1139: Add summary element to documentation comment.
+# Regeln finns bara i Roslynator-extensionen, inte i Roslynator.Analyzers
+# (NuGet), så bygget kan inte tvinga fram den. Raden styr Visual Studio;
+# AVIG0011 gör samma kontroll i bygget.
+dotnet_diagnostic.RCS1139.severity = error
+
+# RCS1113: Use 'string.IsNullOrEmpty' method
+dotnet_diagnostic.RCS1113.severity = error
+
+# RCS1085: Use auto-implemented property
+dotnet_diagnostic.RCS1085.severity = error
+
+# RCS1261: Resource can be disposed asynchronously
+dotnet_diagnostic.RCS1261.severity = error
+
+# RCS1214: Unnecessary interpolated string
+dotnet_diagnostic.RCS1214.severity = error
+
+# RCS1199: Unnecessary null check
+dotnet_diagnostic.RCS1199.severity = error
+
+# RCS1197: Optimize StringBuilder.Append/AppendLine call
+dotnet_diagnostic.RCS1197.severity = error
+
+# MA0042: Do not use blocking calls in an async method
+dotnet_diagnostic.MA0042.severity = error
+
+# MA0040: Forward the CancellationToken parameter to methods that take one
+dotnet_diagnostic.MA0040.severity = error
+
+# MA0003: Add parameter name to improve readability
+dotnet_diagnostic.MA0003.severity = error
+
+# IDE0330: Prefer 'System.Threading.Lock'
+dotnet_diagnostic.IDE0330.severity = error
+
+# IDE0290: Use primary constructor
+dotnet_diagnostic.IDE0290.severity = error
+
+# IDE0230: Use UTF-8 string literal
+dotnet_diagnostic.IDE0230.severity = error
+
+# ASP0018: Unused route parameter
+dotnet_diagnostic.ASP0018.severity = error
+
+# ASP0017: Invalid route template
+dotnet_diagnostic.ASP0017.severity = error
+
+# S8969: Remove redundant null-forgiving operator
+dotnet_diagnostic.S8969.severity = error
+
+### Avig.Analyzers (NuGet) ###
+#
+# AVIG0001-AVIG0012 är de regler som tidigare låg i Medusa.Analyzers och som nu bor i
+# ett eget, projektoberoende paket. Mappningen står i paketets README; de tolv
+# MEDUSA-motsvarigheterna är borttagna ur både analysatorn och den här filen.
+# AVIG0014, AVIG0015, AVIG0020-AVIG0023 finns ingen MEDUSA-motsvarighet till.
+#
+# Alla ligger på error. Paketet levererar dem som suggestion och AVIG0006 avstängd —
+# severity är konsumentens beslut, och det här repot har redan gått igenom sveparna.
+
+# --- Formatering. Alla har code fix och kan köras med dotnet format. ---
+dotnet_diagnostic.AVIG0001.severity = error   # blankrad efter avslutande klammer
+dotnet_diagnostic.AVIG0003.severity = error   # blankrad före return
+dotnet_diagnostic.AVIG0004.severity = error   # blankrad före try
+dotnet_diagnostic.AVIG0005.severity = error   # blankrad före while
+
+# AVIG0006: CRLF. Paketet levererar den avstängd, eftersom den skulle rapportera varje
+# fil i ett LF-repo. Här är CRLF standarden och regeln har varit på sedan tidigare.
+dotnet_diagnostic.AVIG0006.severity = error
+
+# --- Namngivning ---
+dotnet_diagnostic.AVIG0002.severity = error   # enteckensidentifierare
+
+# --- Dokumentation ---
+# AVIG0009: publik controller / I*Repository utan XML-doc. Efterträder MEDUSA0018,
+# som låg på suggestion eftersom i princip varje command/handler-par är odokumenterat.
+# Mätt 2026-09-04: 55 träffar kvar med AVIG0009:s smalare urval. Docs går inte att
+# generera, så den stannar rådgivande tills någon skrivit dem. Mål: error.
+dotnet_diagnostic.AVIG0009.severity = error
+dotnet_diagnostic.AVIG0011.severity = error   # <param>/<returns> utan <summary>
+
+# --- Felhantering och signaturer ---
+dotnet_diagnostic.AVIG0007.severity = error   # metod returnerar null som felsignal
+dotnet_diagnostic.AVIG0008.severity = error   # repository-metod utan CancellationToken
+
+# AVIG0022: publik medlem lämnar ut en muterbar samling.
+# Svept 2026-09-04. Metodreturer och interna hjälptyper typades om till
+# IReadOnly*; kvar är fyra sorters typer där en muterbar samling inte är en läcka
+# utan ett krav. De undantas per fil längst ned i den här filen, eftersom det är
+# filens sort som avgör och inte den enskilda medlemmen.
+dotnet_diagnostic.AVIG0022.severity = error
+
+# --- Async ---
+# AVIG0014: blockerande anrop på en task.
+# Mätt 2026-09-04: 10 träffar, samtliga i klient-SDK:ernas Dispose- och flush-vägar,
+# där OpenTelemetrys exporter-kontrakt är synkront och blockeringen är avsiktlig.
+# Att fixa dem kräver ett annat kontrakt, inte ett await. Mål: error efter genomgång.
+dotnet_diagnostic.AVIG0014.severity = error
+
+# AVIG0015: await tappar en tillgänglig CancellationToken.
+# Mätt 2026-09-04: 2 träffar. Litet svep — höj till error när de är gjorda.
+dotnet_diagnostic.AVIG0015.severity = error
+
+# --- Tid och loggning ---
+# AVIG0020: DateTime.Now / Today i stället för UTC.
+# Mätt 2026-09-04: 8 träffar. Lagring ska alltid vara UTC (se SwedishTime), så de
+# här är antingen riktiga buggar eller medvetna presentationsvärden. Mål: error.
+dotnet_diagnostic.AVIG0020.severity = error
+
+dotnet_diagnostic.AVIG0021.severity = error   # loggmeddelande byggt i stället för templat
+
+# AVIG0023: TODO-kommentar utan referens att följa upp på. Ny i Avig.Analyzers 1.1.0.
+# En TODO utan nummer eller namn är en anteckning till sig själv som ingen hittar igen;
+# med en referens är den ett ärende. Paketet levererar den som warning.
+dotnet_diagnostic.AVIG0023.severity = error
+
+# --- Säkerhet ---
+dotnet_diagnostic.AVIG0010.severity = error   # roll-/scope-/claim-namn som strängliteral
+# AVIG0012: controller-action utan [Authorize]/[AllowAnonymous]. Efterträder MEDUSA0028
+# och behåller dess motivering: rätt åtgärd skiljer sig per host. Portal har ett globalt
+# AuthorizeFilter, så en oannoterad action DÄR är stängd och [AllowAnonymous] skulle
+# öppna den. Identity saknar filtret, så där är den öppen.
+# Mätt 2026-09-04: 16 träffar, samtliga i Identity (QrLogin 8, Auth 6, Discovery 2) —
+# alltså de endpoints där skillnaden faktiskt spelar roll. Mål: error efter genomgång.
+dotnet_diagnostic.AVIG0012.severity = error
+
+### Coding-standard rules enforced by built-in analyzers ###
+
+# IDE0008: use explicit type instead of 'var' - CODING_STANDARDS rule #1, previously unenforced.
+# Measured: 0 real declarations. The only 18 textual 'var' hits in the repo sit inside string
+# literals (embedded JavaScript, CLI help text, doc examples), so this went straight to error.
+#
+# IDE0007 and IDE0008 are a mirrored pair driven by the same csharp_style_var_* options:
+# IDE0007 is "use var" and fires when the options are true, IDE0008 is "use explicit type"
+# and fires when they are false. We set them false, so IDE0007 can never fire - it sat here
+# at error severity and enforced nothing. IDE0008 is the rule that carries this convention.
+# Verified by compiling a file containing 'var value = 42;'.
+#
+# Note: IDE diagnostics are not reported by command-line builds below warning severity - if you
+# ever lower this to suggestion, it stops being checked in CI entirely.
+csharp_style_var_for_built_in_types = false
+csharp_style_var_when_type_is_apparent = false
+csharp_style_var_elsewhere = false
+dotnet_diagnostic.IDE0008.severity = error
+
+# RCS1233: use short-circuiting operator (&& / ||) instead of & / | on bool operands.
+# Prevents the right-hand side evaluating when the left already decides the outcome.
+dotnet_diagnostic.RCS1233.severity = error
+
+# S2325: Methods that don't access instance data should be static
+dotnet_diagnostic.S2325.severity = suggestion
+
+# S125: Commented out code
+dotnet_diagnostic.S125.severity = suggestion
+
+### Meziantou misc ###
+
+# MA0074: Avoid implicit culture-sensitive methods
+dotnet_diagnostic.MA0074.severity = suggestion
+
+# MA0158: Use System.Threading.Lock
+dotnet_diagnostic.MA0158.severity = suggestion
+
+# MA0134: Observe result of async calls
+dotnet_diagnostic.MA0134.severity = warning
+
+### NuGet ###
+
+# NU1510: Package version pinning warnings
+dotnet_diagnostic.NU1510.severity = none
+
+### VS Threading (VSTHRD*) ###
+
+# VSTHRD200: Use "Async" suffix — too noisy, MA0004 is enough
+dotnet_diagnostic.VSTHRD200.severity = none
+
+# VSTHRD103: Avoid synchronously blocking call X
+dotnet_diagnostic.VSTHRD103.severity = error
+
+# VSTHRD111: Use ConfigureAwait(bool) — handled by MA0004 (off in ASP.NET)
+dotnet_diagnostic.VSTHRD111.severity = none
+
+# VSTHRD002: Avoid problematic synchronous waits (.Result/.Wait()) — keep loud
+dotnet_diagnostic.VSTHRD002.severity = warning
+
+# VSTHRD100: Avoid async void — keep loud
+dotnet_diagnostic.VSTHRD100.severity = warning
+
+# VSTHRD110: Observe result of async calls — overlaps with MA0134, keep loud
+dotnet_diagnostic.VSTHRD110.severity = warning
+
+### Public API Analyzers (RS0016/RS0017) — Client libraries ###
+
+# Bootstrap mode: keep at suggestion until PublicAPI.Shipped.txt / Unshipped.txt
+# are populated via IDE quick-fix "Add to public API". Then bump back to warning.
+dotnet_diagnostic.RS0016.severity = suggestion
+dotnet_diagnostic.RS0017.severity = suggestion
+dotnet_diagnostic.RS0036.severity = suggestion
+dotnet_diagnostic.RS0037.severity = suggestion
+dotnet_diagnostic.RS0041.severity = suggestion
+
+### Security (OWASP quick wins) ###
+# Additive only — none of the existing overrides above (incl. the MA0039/S4830/CA5359
+# cert-validation suppression) are touched by this section.
+
+# CA5350: Weak crypto algorithm (MD5/SHA1/DES/RC2/TripleDES)
+dotnet_diagnostic.CA5350.severity = error
+
+# CA5351: Broken crypto algorithm (MD5/DES/RC2/TripleDES for encryption)
+dotnet_diagnostic.CA5351.severity = error
+
+# CA5390: Do not hardcode an encryption key
+dotnet_diagnostic.CA5390.severity = error
+
+# CA5394: Insecure randomness (System.Random used for security-sensitive values)
+dotnet_diagnostic.CA5394.severity = error
+
+# CA5397: Deprecated SSL/TLS protocol version used
+dotnet_diagnostic.CA5397.severity = error
+
+# CA5398: Hardcoded/deprecated SSL/TLS protocol version
+dotnet_diagnostic.CA5398.severity = error
+
+# CA5384: Do not use DSA
+dotnet_diagnostic.CA5384.severity = error
+
+# CA5385: Use RSA keys with a minimum key size of 2048 bits
+dotnet_diagnostic.CA5385.severity = error
+
+# S2068: Hardcoded credentials
+dotnet_diagnostic.S2068.severity = error
+
+# S6418: Hardcoded secrets
+dotnet_diagnostic.S6418.severity = error
+
+# S2092: Cookies should be secure (Secure flag)
+dotnet_diagnostic.S2092.severity = error
+
+# S3330: Cookies should be HttpOnly
+dotnet_diagnostic.S3330.severity = error
+
+# CA5382: Use secure cookies in ASP.NET Core
+dotnet_diagnostic.CA5382.severity = error
+
+# CA5383: Ensure use secure cookies in ASP.NET Core
+dotnet_diagnostic.CA5383.severity = error
+
+# CA5396: Set HttpOnly to true for HttpCookie
+dotnet_diagnostic.CA5396.severity = error
+
+# MA0009: Regex should have a timeout — ReDoS mitigation
+dotnet_diagnostic.MA0009.severity = error
+
+# S6444: Regex should not be vulnerable to ReDoS (matches MA0009 intent)
+dotnet_diagnostic.S6444.severity = error
+
+# CA5389: Do not add archive item's path to the target file system path unvalidated (zip-slip)
+dotnet_diagnostic.CA5389.severity = error
+
+# CA3061: Do not add schema by URL (XXE)
+dotnet_diagnostic.CA3061.severity = error
+
+# CA3075: Insecure DTD processing in XML
+dotnet_diagnostic.CA3075.severity = error
+
+# CA3076: Insecure XSLT script processing
+dotnet_diagnostic.CA3076.severity = error
+
+# CA3077: Insecure processing in API design, XmlDocument and XmlTextReader
+dotnet_diagnostic.CA3077.severity = error
+
+
+[tests/**/*.cs]
+
+# xUnit2004: Use Assert.True/False instead of Assert.Equal for bool
+dotnet_diagnostic.xUnit2004.severity = none
+
+# xUnit2024: Do not use boolean asserts for simple equality tests
+dotnet_diagnostic.xUnit2024.severity = error
+
+# xUnit2025: The boolean assertion statement can be simplified
+dotnet_diagnostic.xUnit2025.severity = error
+
+# S1144: Unused private types or members — test helpers
+dotnet_diagnostic.S1144.severity = none
+
+### S6640: unsafe-kod i Win32-delen ###
+
+# Appen pratar direkt med Win32 i stället för WinForms, eftersom WinForms inte fungerar med
+# Native AOT. CsWin32 genereras utan runtime-marshalling (allowMarshaling: false) för att vara
+# AOT-säkert, och då är pekare och fasta buffertar det enda sättet att anropa API:erna. Regeln
+# skulle slå på varje fil i projektet; SnapShot.Core har inget undantag.
+[src/SnapShot/{**/,}*.cs]
+dotnet_diagnostic.S6640.severity = none
